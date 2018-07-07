@@ -8,26 +8,6 @@ var modulus =
 var nonce = '0CoJUm6Qyw8W8jud';
 var pubKey = '010001';
 
-function convert(str) {
-    // var binary = "";
-    // for (var i=0; i < str.length; i++) {
-    //     binary += str[i].charCodeAt(0).toString(2) + " ";
-    // }
-    // return binary;
-        return CryptoJS.enc.Utf8.parse(str).toString();
-
-}
-
-String.prototype.hexEncode = function() {
-    var hex, i;
-    var result = '';
-    for (i = 0; i < this.length; i++) {
-        hex = this.charCodeAt(i).toString(16);
-        result += ('' + hex).slice(-4);
-    }
-    return result
-};
-
 function createSecretKey(size) {
     var keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     var key = '';
@@ -40,27 +20,11 @@ function createSecretKey(size) {
 }
 
 function aesEncrypt(text, secKey) {
-    var _text = text;
-    // console.log(text);
-    // console.log(secKey);
-
-    // var lv = new Buffer('0102030405060708', 'binary');
-    var lv = convert("0102030405060708");
-    // var _secKey = new Buffer(secKey, 'binary');
-    var _secKey = convert(secKey);
-    // var cipher = CryptoJS.algo.AES.createEncryptor(_secKey, lv);
-    // var cipher = CryptoJS.CipherParams.create();
-    // var cipher = CryptoJS.Cipher('AES-128-CBC', _secKey, lv);
-    // var encryptor = CryptoJS.algo.AES.createEncryptor(_secKey, lv);
-    // var cipher = crypto.createCipheriv('AES-128-CBC', _secKey, lv);
-    // var cipher = CryptoJS.AES.encrypt(_text, _secKey, { mode: CryptoJS.mode.CBC, iv: lv });
-    // var encrypted = encryptor.encrypt(_text);
-    var encrypted = CryptoJS.AES.encrypt(_text, _secKey, { iv: lv });
-    // var encrypted = cipher.update(_text, 'utf8', 'base64');
-    // encrypted += cipher.final('base64');
-    encrypted += CryptoJS.enc.Base64.parse(encrypted.toString(CryptoJS.enc.Utf8));
-    // var encrypted = CryptoJS.AES.encrypt(_text, _secKey, { iv: lv });
-    return encrypted;
+    var _text = CryptoJS.enc.Utf8.parse(text);
+    var _secKey = CryptoJS.enc.Utf8.parse(secKey);
+    var lv = CryptoJS.enc.Utf8.parse('0102030405060708');
+    var encrypted = CryptoJS.AES.encrypt(_text, _secKey, { iv: lv, mode: CryptoJS.mode.CBC});
+    return encrypted.toString();
 }
 
 function zfill(str, size) {
@@ -68,48 +32,9 @@ function zfill(str, size) {
     return str;
 }
 
-function binaryToAscii(text) {
-    console.log(text);
-    var regex = /[0|1]{8}/g;
-    // var str = text.match(regex);
-    var str = text;
-    console.log(str);
-    var code = 0;
-    var placeVal, exp, digit;
-    var ascii = '';
-    while (str.length > 0) {
-        code = 0;
-        for (var i=0; i<str[0].length; i++) {
-            placeVal = 7-i;
-            exp = Math.pow(2, i);
-            digit = str[0].charAt(placeVal);
-            code += exp*digit;
-        }
-        // str.shift();
-        ascii += String.fromCharCode(code);
-    }
-    return ascii;
-}
-
-//字符串转16进制
-
-function strToHexCharCode(str) {
-    if(str === "")
-        return "";
-    var hexCharCode = [];
-    // hexCharCode.push("0x");
-    for(var i = 0; i < str.length; i++) {
-        hexCharCode.push((str.charCodeAt(i)).toString(16));
-    }
-    return hexCharCode.join("");
-}
-
 function rsaEncrypt(text, pubKey, modulus) {
     var _text = text.split('').reverse().join('');
-    console.log(_text);
-    console.log(convert(_text));
-    console.log(convert(_text).hexEncode());
-    var biText = bigInt(convert(_text).hexEncode(), 16),
+    var biText = bigInt(CryptoJS.enc.Utf8.parse(_text).toString(), 16),
         biEx = bigInt(pubKey, 16),
         biMod = bigInt(modulus, 16),
         biRet = biText.modPow(biEx, biMod);
@@ -130,5 +55,14 @@ function Encrypt(obj) {
         encSecKey: encSecKey
     }
 }
+
+var data = {
+        offset: 0,
+        uid: "36483032",
+        limit: 30,
+        csrf_token: ""
+    };
+
+Encrypt(data);
 
 // module.exports = Encrypt
