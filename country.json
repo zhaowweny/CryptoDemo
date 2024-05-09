@@ -1,4 +1,6 @@
-[
+{
+  "success": true,
+  "content": [
     {
       "text": "选项A",
       "value": "A"
@@ -8,5 +10,10 @@
     },{
       "text": "选项C",
       "value": "C"
-    }
-  ]
+    },
+  ],
+  "errorCode": "",
+  "errorExtInfo": null,
+  "errorLevel": "",
+  "errorMsg": ""
+}
