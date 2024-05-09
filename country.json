@@ -1,19 +1,88 @@
 {
-  "success": true,
-  "content": [
-    {
-      "text": "选项A",
-      "value": "A"
-    },{
-      "text": "选项B",
-      "value": "B"
-    },{
-      "text": "选项C",
-      "value": "C"
-    }
-  ],
-  "errorCode": "",
-  "errorExtInfo": null,
-  "errorLevel": "",
-  "errorMsg": ""
+    "status": 1,
+    "errorCode": "",
+    "msg": "",
+    "data": [
+        {
+            "country": "1",
+            "countryCode": "CN",
+            "countryName": "中国大陆",
+            "businessArea": "0",
+            "isOverseas": "0",
+            "node": "cn",
+            "ipArea": "CN"
+        },
+        {
+            "country": "1",
+            "countryCode": "CN",
+            "countryName": "台湾",
+            "businessArea": "4",
+            "isOverseas": "0",
+            "node": "cn",
+            "ipArea": "CN"
+        },
+        {
+            "country": "1",
+            "countryCode": "CN",
+            "countryName": "香港",
+            "businessArea": "6",
+            "isOverseas": "1",
+            "node": "cn",
+            "ipArea": "CN"
+        },
+        {
+            "country": "1",
+            "countryCode": "CN",
+            "countryName": "澳门",
+            "businessArea": "5",
+            "isOverseas": "1",
+            "node": "cn",
+            "ipArea": "CN"
+        },
+        {
+            "country": "99",
+            "countryCode": "",
+            "countryName": "其他海外国家",
+            "businessArea": "3",
+            "isOverseas": "1",
+            "node": "cn",
+            "ipArea": null
+        },
+        {
+            "country": "860",
+            "countryCode": "UZ",
+            "countryName": "乌兹别克斯坦",
+            "businessArea": "59",
+            "isOverseas": "1",
+            "node": "cn",
+            "ipArea": "CN"
+        },
+        {
+            "country": "398",
+            "countryCode": "KZ",
+            "countryName": "哈萨克斯坦",
+            "businessArea": "60",
+            "isOverseas": "1",
+            "node": "cn",
+            "ipArea": "CN"
+        },
+        {
+            "country": "051",
+            "countryCode": "AM",
+            "countryName": "亚美尼亚",
+            "businessArea": "61",
+            "isOverseas": "1",
+            "node": "cn",
+            "ipArea": "CN"
+        },
+        {
+            "country": "804",
+            "countryCode": "UA",
+            "countryName": "乌克兰",
+            "businessArea": "63",
+            "isOverseas": "1",
+            "node": "cn",
+            "ipArea": "CN"
+        }
+    ]
 }
